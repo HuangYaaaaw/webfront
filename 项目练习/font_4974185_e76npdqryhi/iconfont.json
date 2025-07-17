@@ -1,0 +1,16 @@
+{
+  "id": "4974185",
+  "name": "警察",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "40421453",
+      "name": "警察-01",
+      "font_class": "jingcha-01",
+      "unicode": "ecbb",
+      "unicode_decimal": 60603
+    }
+  ]
+}
