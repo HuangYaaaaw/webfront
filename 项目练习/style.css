@@ -1,0 +1,444 @@
+/* 初始化 */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, textarea, button, p, blockquote, th, td {
+    margin: 0 auto;
+    padding: 0;
+}
+body {
+    background: #f1f1f1;
+    font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+img {
+    border: none;
+}
+
+/* 头部导航部分 start */
+.header {
+    width: 100%;
+    height: 56px;
+    background-color: rgb(13, 29, 117);
+}
+.wrap {
+    width: 1400px;
+}
+.header ul {
+    width: 261px;
+    height: 36px;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+}
+.header ul li a,
+.header ul span {
+    color: white;
+    line-height: 55px;
+    font-size: 15px;
+}
+.header li span {
+    padding-left: 15px;
+}
+/* 头部导航部分 end */
+
+/* 白色导航部分 start */
+.white-nav {
+    margin-top: 20px;
+    height: 140px;
+    position: relative;
+}
+.white-nav-right{
+    margin-top: 20px;
+}
+.white-nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.white-nav-left img {
+    width: 290px;
+    height: 66.83px;
+}
+
+.white-nav-right ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.white-nav-right ul li {
+    margin-left: 30px;
+    color: rgb(13, 29, 117);
+    position: relative;
+}
+
+.white-nav-right ul li a {
+    display: inline-block;
+    line-height: 30px;
+    color: rgb(13, 29, 117);
+    text-decoration: none;
+}
+
+.white-nav-right ul li:hover a {
+    border-bottom: 4px solid rgb(13, 29, 117);
+}
+
+/* 购物车下拉菜单 - 关键修改点 */
+.white-nav-right .cart {
+    border: #464343 0.5px solid;
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 300px; /* 设置最小宽度 */
+    margin-top: 8px;
+    width: max-content; /* 关键：宽度由内容决定 */
+    max-width: 500px; /* 最大宽度限制 */
+    background-color: rgba(255, 255, 255, 0.654);
+    padding: 15px;
+    z-index: 100;
+    /* 使用Grid布局更精准控制 */
+    display: none;
+    grid-template-columns: auto 1fr; /* 图片自动宽度，列表占剩余空间 */
+    gap: 15px;
+    align-items: start; /* 顶部对齐 */
+}
+
+.white-nav-right .cart img {
+    width: 120px; /* 固定图片宽度 */
+    height: auto;
+    object-fit: cover;
+}
+
+.white-nav-right .cart ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.white-nav-right .cart li {
+    margin: 0;
+    padding: 5px 0;
+    white-space: nowrap; /* 防止文字换行 */
+}
+
+.white-nav-right .cart li a {
+    font-size: small;
+    color: #3a4050;
+    border: none !important;
+}
+
+.white-nav-right li:hover .cart {
+    display: grid; /* 鼠标悬停时显示为grid */
+}
+
+/* 下拉箭头 - 调整位置计算方式 */
+.white-nav-right .str1 {
+    display: none;
+    position: absolute;
+    bottom: -8px;
+    left: 30px; /* 固定位置，根据实际调整 */
+    width: 0;
+    height: 0;
+    border-bottom: 8px solid #221a6c;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    z-index: 101;
+}
+
+.white-nav-right li:hover .str1 {
+    display: block;
+}
+.white-nav-right .right-aligned {
+    left: auto !important;      /* 取消左侧定位 */
+    right: 0 !important;        /* 靠右对齐 */
+    transform: none !important; /* 防止位移 */
+}
+/* 白色导航部分 end */
+/* banner图片区start */
+.banner img{
+    width: 100%;
+    height: 291.66px;
+    margin-top: -50px;
+}
+/* banner图片区end */
+/* 新闻区start */
+.news{
+    width: 1200px;
+    height: 1174.09px;
+    margin-top: 30px;
+    display: flex;
+}
+.news-left{
+    width: 800px;
+    height: 1043.09px;
+}
+.news-left .type{
+    width: 800px;
+    height: 70.63px;
+    border-bottom: rgb(199, 188, 188) 0.5px solid;
+    overflow: hidden; /* 清除浮动 */
+}
+.news-left .type-left{
+    float: left;
+    line-height: 70.63px;
+}
+.news-left .type-left h2{
+    color: rgb(13, 29, 117);
+    margin: 0; /* 移除默认边距 */
+}
+.news-left .type-right ul{
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    line-height: 70.63px;
+    margin: 0; /* 移除默认边距 */
+    padding: 0; /* 移除默认内边距 */
+    list-style: none; /* 移除列表样式 */
+}
+.news-left .type-right ul a{
+    color: rgb(80, 77, 77);
+    margin-left: 5px;
+}
+.news-left .content{
+    clear: both; /* 确保内容在浮动元素下方 */
+    padding-top: 20px; /* 添加顶部间距 */
+}
+.news-left .content video{
+    width: 420px;
+    height: 280px;
+    margin: 0 auto;
+    display: block; /* 确保视频居中 */
+}
+
+.news-left .content h1,
+.news-left .content .author,
+.news-left .content .video {
+    text-align: center;
+}
+.news-left .content h1 {
+    text-align: center !important;
+    margin-bottom: 10px; /* 添加底部间距 */
+}
+.news-left .video{
+    margin: 20px 0 30px;
+}
+.content .art {
+  text-indent: 2em;        
+  margin-bottom: 10px;
+  line-height: 30px;     
+}
+.news-left .content{
+    border-bottom: grey 0.5px dashed;
+}
+.news-left .left-end-left{
+    margin-top: 20px;
+    font-size: 13px;
+    line-height: 20px;
+}
+.news-left .left-end-left a{
+    color: rgb(69, 66, 66);
+}
+.news-left .left-end-left{
+    width: 400px;
+    height: 56px;
+    float: left;
+    overflow: hidden;
+}
+.news-left .left-end-right ul{
+    display: flex;
+    float: right;
+}
+.news-left .left-end-right ul{
+    margin-top: 30px;
+}
+.news-left .left-end-right ul a{
+    font-size: 30px;
+    margin: 0 10px;
+}
+.news-left .left-end-right ul li:nth-child(1){
+    color: rgb(215, 88, 42);
+}
+.news-left .left-end-right ul li:nth-child(2) a{
+     color: rgb(215, 88, 42);
+}
+.news-left .left-end-right ul li:nth-child(3) a{
+    color: green;
+}
+.news-left .left-end-right ul li:nth-child(4) a{
+    color: black;
+}
+.news-left .left-end-right ul li:nth-child(5) a{
+    color: rgb(234, 234, 59);
+}
+/* 重置默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.news-right {
+    width: 360px;
+    height: 557.63px;
+    font-family: Arial, sans-serif;
+}
+
+.news-right .headline {
+    margin-bottom: 10px;
+}
+
+.news-right h2 {
+    width: 100%;
+    height: 44px;
+    background: #dddada;
+    text-align: center;
+    line-height: 44px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.news-right ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.news-right li {
+    display: flex;
+    align-items: flex-start; /* 顶部对齐 */
+    width: 100%;
+    height: 80px;
+    padding: 5px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #beb7b7; /* 分隔线便于查看 */
+}
+
+.news-right .square {
+    flex: 0 0 61.5px; /* 固定宽度，不伸缩 */
+    height: 61.5px;
+    border: 0.5px solid #464343;
+    margin:0 10px;
+    background: #f0f0f0;
+    display: inline; /* 确保方块内部布局正确 */
+    /* align-items: center;
+    justify-content: center; */
+    position: relative;
+}
+.news-right .square p{
+    position: absolute;
+    font-size: x-large;
+    color: rgb(30, 30, 136);
+    left: 15px;
+    top: 5px;
+}
+.news-right .square span{
+    position: absolute;
+    font-size: small;
+    left: 5px;
+    top: 35px;
+}
+.news-right li a {
+    flex: 1; /* 占据剩余空间 */
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    min-height: 61.5px; /* 与方块高度匹配 */
+}
+.news-right ul{
+    transition: all 1s;
+}
+.news-right li:hover{
+    transform: translateY(8px);
+    box-shadow: 4px 10px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+}
+.news-right li:hover a{
+    font-size: medium;
+}
+/* 新闻区end */
+/* 页脚部分start */
+.foot{
+    width: 100%;
+    height: 164px;
+    background-color: #3a4050;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.foot .logo{
+    display: inline;
+    width: 268px;
+    height: 108px;
+    position: relative;
+}
+.foot .logo img:nth-child(1)
+{
+    margin-bottom: 30px;
+}
+.foot .web{
+    position: absolute;
+    left: 250px;
+}
+.foot .web a{
+    color: white;
+    font-size: small;
+    margin-top: 6px;
+}
+.foot .logo2{
+    position: relative;
+    left: 100px;
+}
+.foot .subscribe{
+    width: 540px;
+    height: 133.5px;
+    position: relative;
+    margin-left: 20px;
+}
+.foot .subscribe li:nth-child(1) img
+{
+    width: 180px;
+    height: 98px;
+    position: absolute;
+    left: 60px;
+}
+.foot .subscribe li:nth-child(2){
+    width: 106px;
+    height: 98px;
+    position: absolute;
+    left: 250px;
+}
+.foot .subscribe li:nth-child(2) p{
+    color: white;
+    font-size: small;
+}
+.foot .subscribe li:nth-child(3) img{
+    width: 108px; 
+    height: 98px;
+    position: absolute;
+    left: 400px;
+}
+/* 页脚部分end */
+/* 最后start */
+.end{
+    padding-top: 10px;
+    width: 100%;
+    height: 118px;
+    text-align: center;
+    background-color: #292c3b;
+}
+.end p,.end a{
+    color: white;
+    font-size: small;
+    line-height: 30px;
+}
+/* 最后end */
