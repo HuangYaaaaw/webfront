@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            margin: 0 auto;
+        }
+        h2{
+            text-align: center;
+        }
+        table,tr,th,td{
+            text-align: center;
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 5px 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>订单信息</h2>
+    
+    <script>
+        let name=prompt('产品姓名')
+        let price=+prompt('产品单价')
+        let num=+prompt('产品数量')
+        let sum=price*num
+        let place=prompt('收货地址')
+        document.write(`
+                <table>
+                <tr>
+                    <th>产品名称</th>
+                    <th>产品单价</th>
+                    <th>产品数量</th>
+                    <th>产品总价</th>
+                    <th>收货地址</th>
+                </tr>
+                <tr>
+                    <td>${name}</td>
+                    <td>${price}</td>
+                    <td>${num}</td>
+                    <td>${sum}</td>
+                    <td>${place}</td>
+                </tr>
+            </table>
+        `)
+    </script>
+    <!-- th是thead的缩写，同于头部框，td是tbody的缩写，用于内容的普通框 -->
+     <!-- border-collapse: collapse;可以减少不必要的框框，使得内容更加美观 -->
+      <!-- table里面增加属性border=1可以让表格有框 -->
+</body>
+</html>

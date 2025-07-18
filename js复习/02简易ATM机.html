@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let sum=100
+        while(true)
+    {
+        let n=+prompt(`请选择你的操作
+        1.取钱
+        2.存钱
+        3.查看余额
+        4.退出`)
+        if(n===4)
+    {
+        break;
+    }
+    switch (n){
+        case 1:
+            let money1=+prompt('取出多少钱')
+            sum-=money1
+            break;
+        case 2:
+            let money2=+prompt('存取多少钱')
+            sum+=money2
+            break;
+        case 3:
+            alert(`余额是${sum}`)
+            break;
+    }
+    }
+    // case后面任何类型都可以接，不一定是数字
+    </script>
+</body>
+</html>

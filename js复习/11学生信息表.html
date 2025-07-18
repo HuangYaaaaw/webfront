@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>学生信息管理</title>
+  <link rel="stylesheet" href="D:\HUYa的桌面\css\index.css">
+</head>
+
+<body>
+  <h1>新增学员</h1>
+  <form class="info" autocomplete="off">
+    姓名：<input type="text" class="uname" name="uname" />
+    年龄：<input type="text" class="age" name="age" />
+    性别:
+    <select name="gender" class="gender">
+      <option value="男">男</option>
+      <option value="女">女</option>
+    </select>
+    薪资：<input type="text" class="salary" name="salary" />
+    就业城市：<select name="city" class="city">
+      <option value="北京">北京</option>
+      <option value="上海">上海</option>
+      <option value="广州">广州</option>
+      <option value="深圳">深圳</option>
+      <option value="曹县">曹县</option>
+    </select>
+    <button class="add">录入</button>
+  </form>
+
+  <h1>就业榜</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>薪资</th>
+        <th>就业城市</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 
+        <tr>
+          <td>1001</td>
+          <td>欧阳霸天</td>
+          <td>19</td>
+          <td>男</td>
+          <td>15000</td>
+          <td>上海</td>
+          <td>
+            <a href="javascript:">删除</a>
+          </td>
+        </tr> 
+        -->
+    </tbody>
+  </table>
+  <script>
+    const uname = document.querySelector('.info .uname')   
+    const age = document.querySelector('.info .age')      
+    const gender = document.querySelector('.gender')      
+    const salary = document.querySelector('.salary')      
+    const city = document.querySelector('.city')      
+    const a = []
+    const items = document.querySelectorAll('[name]')
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault()//組織表單的默認行為，防止表單提交後自動刷新
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].value === '') {//判斷輸入是否為空
+          alert('輸入不能為空')
+          return
+        }
+      }
+      const obj={//構造對象注意裡面既要有屬性名又要有屬性值
+        num:a.length,
+        uname:uname.value,
+        age:age.value,
+        gender:gender.value,
+        salary:salary.value,
+        city:city.value
+      }
+      a.push(obj)
+      render(a)
+      this.reset()
+    })
+    const dele=document.querySelector('tbody')
+    dele.addEventListener('click',function(e){
+      if(e.target.tagName==='A')
+    {
+      a.splice(Number(e.target.dataset.id),1)//e.target.dataset.id獲得的數字是字符串，需要轉化為數字
+      render(a)
+    }
+    })
+    function render(arr){
+      const tbody=document.querySelector('tbody')
+      tbody.innerHTML=''//每次重新渲染之前都要把表格裡面的內容清空，以免之前的內容造成重合
+      for(let i=0;i<arr.length;i++)
+    {
+      const tr=document.createElement('tr')//這裡創造的就是tr標簽了，所以這個標簽的裡面不再需要<tr>
+      tr.innerHTML=`
+          <td>${i+1}</td>
+          <td>${arr[i].uname}</td>
+          <td>${arr[i].age}</td>
+          <td>${arr[i].gender}</td>
+          <td>${arr[i].salary}</td>
+          <td>${arr[i].city}</td>
+          <td>
+            <a href="javascript:" data-id=${i}>删除</a>
+          </td>
+        `
+        tbody.appendChild(tr)
+    }
+    }
+  </script>
+
+</body>
+
+</html>

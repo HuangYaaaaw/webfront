@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时效果</title>
+    <style>
+        div {
+            width: 300px;
+            height: 100px;
+            background-color: pink;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        document.querySelector('div').innerHTML=`${new Date()}`
+       setInterval(function(){const now=+new Date()
+       const future=+new Date('2025-7-31 08:00:00')
+       const differ=Math.floor((future-now)/1000);
+       const days=parseInt(differ/60/60/24)
+       const hours=parseInt(differ/60/60%24)
+       const minutes=parseInt(differ/60%60)
+       const seconds=parseInt(differ%60)
+       document.querySelector('div').innerHTML=`${days}天${hours}小时${minutes}分钟${seconds}秒`},1000)
+    </script>
+</body>
+</html>
