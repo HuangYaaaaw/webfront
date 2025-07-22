@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./font_4981400_uv8b0i0ujf/iconfont.css">
     <style>
         body {
             background-color: #f1eeee;
@@ -256,6 +257,26 @@
         .body tbody td a:nth-child(2) {
             margin-left: 15px;
         }
+
+        .body .date {
+            width: 183px;
+            height: 45px;
+            /* 不设置display: flex */
+        }
+
+        .body .date span,
+        .body .date div {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .date i {
+            display: block;
+        }
+
+        .body .date div {
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -274,7 +295,12 @@
                         <th class="allChoose"><input type="checkbox" name="" id=""></th>
                         <th>名称</th>
                         <th>备注</th>
-                        <th>创建时间</th>
+                        <th class="date"><span>创立时间</span>
+                            <div>
+                                <i class="iconfont icon-shangsanjiao up"></i>
+                                <i class="iconfont icon-xiasanjiao down"></i>
+                            </div>
+                        </th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -333,92 +359,201 @@
     </div>
     </div>
     <script>
-        //表单的增加效果
-        (function () {
-            const add = document.querySelector('.btn2');
-            const tab = document.querySelector('.tab');
-            const overlay = document.querySelector('.overlay');
-            const closeBtn = document.querySelector('.tab-up button');
+        document.addEventListener('DOMContentLoaded', function () {
+            let arr = [];
+            let editingIndex = null;  //判断对话栏目判断是新增该是修改
 
-            // 新增按钮点击事件
-            add.addEventListener('click', function () {
-                tab.style.display = 'block';
-                overlay.style.display = 'block';
-            });
+            //新增功能
+            (function () {
+                const add = document.querySelector('.btn2');
+                const tab = document.querySelector('.tab');
+                const overlay = document.querySelector('.overlay');
+                const closeBtn = document.querySelector('.tab-up button');
+                add.addEventListener('click', function () {
+                    tab.style.display = 'block';
+                    overlay.style.display = 'block';
+                });
+                closeBtn.addEventListener('click', function () {
+                    document.querySelector('.tab form').reset();
+                    tab.style.display = 'none';
+                    overlay.style.display = 'none';
+                });
+                const cancel = document.querySelector('.cancel-btn');
+                const submit = document.querySelector('.submit-btn');
+                submit.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const inputs = document.querySelectorAll('.tab input');
+                    const name = inputs[0].value;
+                    if (name === '') {
+                        alert('名称不能为空');
+                        return;
+                    }
+                    const remark = inputs[1].value;
+                    const uls = document.querySelectorAll('.uls>div>ul');
+                    let choice1 = uls[0].querySelectorAll('li');
+                    let choice2 = uls[1].querySelectorAll('li');
+                    choice1 = Array.from(choice1).filter(item => {
+                        const checkbox = item.querySelector('input');
+                        return checkbox.checked;
+                    }).map(item => item.textContent.trim());
+                    choice2 = Array.from(choice2).filter(item => item.querySelector('input').checked).map(item => item.textContent.trim());
+                    const date = new Date();
+                    const obj = {
+                        name: name,
+                        remark: remark,
+                        choice1: choice1,
+                        choice2: choice2,
+                        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
+                    };
+                    if (editingIndex !== null) {
+                        // 是修改模式
+                        arr[editingIndex] = obj;
+                    } else {
+                        // 是新增模式
+                        arr.push(obj);
+                    }
+                    // 重置状态 & 表单 & 渲染
+                    editingIndex = null;
+                    document.querySelector('.tab form').reset();
+                    tab.style.display = 'none';
+                    overlay.style.display = 'none';
+                    render(arr);
+                });
+                cancel.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    tab.style.display = 'none';
+                    overlay.style.display = 'none';
+                    document.querySelector('.tab form').reset();
+                });
+            })();
 
-            // 关闭按钮点击事件（单独绑定）
-            closeBtn.addEventListener('click', function () {
-                document.querySelector('form').reset()
-                tab.style.display = 'none';
-                overlay.style.display = 'none';
-            });
-
-            //表单的提交
-            let arr = []
-            const cancel = document.querySelector('.cancel-btn')
-            const submit = document.querySelector('.submit-btn')
-            submit.addEventListener('click', function (e) {
-                e.preventDefault()
-                const inputs = document.querySelectorAll('.tab input')
-                const name = inputs[0].value
-                if (name === '') {
-                    alert('名称不能为空')
-                    return;
-                }
-                const remark = inputs[1].value
-                const uls = document.querySelectorAll('.uls>div>ul')
-                let choice1 = uls[0].querySelectorAll('li')
-                let choice2 = uls[1].querySelectorAll('li')
-                //由于queryselectorALL不能直接使用方法，所以要先将伪数组转化为真数组
-                choice1 = Array.from(choice1).filter(item => {
-                    const checkbox = item.querySelector('input')
-                    return checkbox.checked
-                }).map(item => `${item.textContent.trim()}`)
-                //item.textContent.trim()获得标签里面额所有文字文本，trim则是去除文本前后的空格的方法（文本中的去除不了）
-                choice2 = Array.from(choice2).filter(item => item.querySelector('input').checked
-                ).map(item => item.textContent.trim())
-
-                const date = new Date()//get是一种方法，要先有对象，而后才能从中获取
-                const obj = {
-                    name: name,
-                    remark: remark,
-                    choice1: choice1,
-                    choice2: choice2,
-                    date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours() + 1}:${date.getMinutes()}:${date.getSeconds()}`
-                }
-                arr.push(obj)
-                console.log(arr);
-                document.querySelector('form').reset()
-                tab.style.display = 'none';
-                overlay.style.display = 'none';
-                render(arr)
-            })
-            //tab的删除功能
-            cancel.addEventListener('click', function (e) {
-                e.preventDefault()
-                tab.style.display = 'none';
-                overlay.style.display = 'none';
-                document.querySelector('form').reset()
-
-            })
-            //渲染的功能实现函数  
+            //渲染函数
             function render(arr) {
-                const content = document.querySelector('.body tbody')
-                content.innerHTML = ''
+                const content = document.querySelector('.body tbody');
+                content.innerHTML = '';
                 for (let i = 0; i < arr.length; i++) {
-                    const { name, remark, date, choice1, choice2 } = arr[i]
-                    const tr = document.createElement('tr')
-                    tr.innerHTML = `<td><input type="checkbox" data-id=${i + 1}></td>
-                    <td>${name}</td>
-                    <td>${remark}</td>
-                    <td>${date}</td>
-                    <td><a href="#" class="edit">修改</a><a href="#" class="diminish">删除</a></td>`
-                    content.appendChild(tr)
+                    const { name, remark, date } = arr[i];
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td><input type="checkbox" data-id="${i + 1}"></td>
+                <td>${name}</td>
+                <td>${remark}</td>
+                <td>${date}</td>
+                <td><a href="#" class="edit" data-id="${i + 1}">修改</a><a href="#" class="diminish" data-id="${i + 1}">删除</a></td>`;
+                    content.appendChild(tr);
                 }
             }
-        })();
-        //表单的删除效果
-        
+
+            // 全选/取消全选功能
+            (function () {
+                const allChoose = document.querySelector('.body thead .allChoose input[type="checkbox"]')
+                allChoose.addEventListener('change', function () {
+                    const checkbox = document.querySelectorAll('.body tbody tr input[type="checkbox"]')
+                    checkbox.forEach(item => item.checked = allChoose.checked)
+                })
+            })();
+
+            // 删除功能
+            (function () {
+                const dele = document.querySelector('.head .btn3');
+                dele.addEventListener('click', function () {
+                    const choose = Array.from(document.querySelectorAll('tbody td input[type="checkbox"]'))
+                    const checkbox = choose.filter(item => item.checked)
+                    if (checkbox.length === 0) {
+                        alert('请选中要删除的项')
+                        return;//停止执行剩余的删除逻辑
+                    }
+                    const ids = checkbox.map(item => Number(item.getAttribute('data-id')) - 1)
+                    ids.sort((a, b) => b - a).forEach(item => arr.splice(item, 1))
+                    render(arr)
+                    document.querySelector('.body thead .allChoose input[type="checkbox"]').checked = false;
+                });
+            })();
+
+            //操作栏目的功能
+            (function () {
+                const tbody = document.querySelector('tbody');
+                tbody.addEventListener('click', function (e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                    }
+                    if (e.target.classList.contains('diminish')) {
+                        const id = Number(e.target.getAttribute('data-id')) - 1;
+                        arr.splice(id, 1);
+                        render(arr);
+                    }
+                    if (e.target.classList.contains('edit')) {
+                        const id = Number(e.target.getAttribute('data-id')) - 1;
+                        editingIndex = id;
+                        const obj = arr[id];
+                        document.querySelector('.tab').style.display = 'block';
+                        document.querySelector('.overlay').style.display = 'block';
+                        const inputs = document.querySelectorAll('.tab input');
+                        inputs[0].value = obj.name;
+                        inputs[1].value = obj.remark;
+                        obj.choice1.forEach(name => {
+                            Array.from(document.querySelectorAll('.uls>div>ul')[0].querySelectorAll('li')).forEach(item => {
+                                if (item.textContent === name) {
+                                    item.querySelector('input').checked = true
+                                }
+                            })
+                        })
+                        obj.choice2.forEach(name => {
+                            Array.from(document.querySelectorAll('.uls>div>ul')[1].querySelectorAll('li')).forEach(item => {
+                                if (item.textContent === name) {
+                                    item.querySelector('input').checked = true
+                                }
+                            })
+                        })
+
+                    }
+                });
+            })();
+
+            //查询功能
+            (function () {
+                const research = document.querySelector('.head .btn1')
+                research.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const name = document.querySelector('.head input[type=text]').value
+                    const fliterarr = arr.filter(item => item.name === name)
+                    const tbody = document.querySelector('.body tbody');
+                    tbody.innerHTML = ''
+                    if (fliterarr.length === 0) {
+                        const tr = document.createElement('tr')
+                        tr.innerHTML = `<td colspan="5">暂无数据</td>`
+                        tbody.appendChild(tr)
+                    }
+                    else {
+                        render(fliterarr)
+                    }
+                    document.querySelector('.head input[type=text]').value = ''
+                })
+            })();
+
+            //时间排序板块
+            (function () {
+                const up = document.querySelector('thead tr .up')
+                const down = document.querySelector('thead tr .down')
+                up.addEventListener('click', function () {
+                    const sortedArr = [...arr].sort((a, b) => {
+                        return +new Date(b.date) - +new Date(a.date);
+                        //要将其转化为时间戳才能进行加减比较
+                    });
+                    //[...arr]是引用类型防止直接对arr数组进行修改，这种方法不影响原本的数组
+                    render(sortedArr);
+                });
+                down.addEventListener('click', function () {
+                    const sortedArr = [...arr].sort((a, b) => {
+                        return +new Date(a.date) - +new Date(b.date);
+                    });
+                    render(sortedArr);
+                });
+            })();
+            
+        });
+
+
+
     </script>
 </body>
 

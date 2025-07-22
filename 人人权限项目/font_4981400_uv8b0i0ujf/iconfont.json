@@ -1,0 +1,23 @@
+{
+  "id": "4981400",
+  "name": "时间",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "44928249",
+      "name": "上三角",
+      "font_class": "shangsanjiao",
+      "unicode": "e8ba",
+      "unicode_decimal": 59578
+    },
+    {
+      "icon_id": "44928252",
+      "name": "下三角",
+      "font_class": "xiasanjiao",
+      "unicode": "e8bb",
+      "unicode_decimal": 59579
+    }
+  ]
+}
