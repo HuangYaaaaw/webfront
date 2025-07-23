@@ -162,7 +162,7 @@
     render(goodsList)
     document.querySelector('.filter').addEventListener('click',function(e){
       const {tagName,dataset}=e.target
-      let arr=goodsList
+      let arr=goodsList//创造一个新的数组来接纳数组，防止后期数据的改动导致数据的丢失
       if(tagName==='A')
     {
       if(dataset.index==='1')
